@@ -1,0 +1,33 @@
+#!/bin/sh
+
+mod="Super"
+
+riverctl input pointer-5426-152-Razer_Razer_DeathAdder_Essential accel-profile flat
+
+riverctl keyboard-layout -options grp:alt_shift_toggle us,ru
+wlr-randr --output DP-1 --pos 0,0 --output HDMI-A-1 --pos 1920,0
+
+riverctl map normal $mod P spawn librewolf
+riverctl map-pointer normal $mod BTN_LEFT move-view 
+riverctl map-pointer normal $mod BTN_RIGHT resize-view
+riverctl map normal $mod Return spawn alacritty
+riverctl map normal $mod W close
+riverctl map normal $mod+Shift Q exit
+riverctl map normal $mod+Shift J send-to-output next
+riverctl map normal Alt Tab focus-output next
+
+riverctl map normal $mod+Shift S spawn 'grim -g "$(slurp)" - | wl-copy'
+
+# windows
+riverctl map normal $mod F toggle-fullscreen
+
+for i in 1 2 3 4 5 6 7 8 9; do
+	tags=$((1 << (i-1)))
+	riverctl map normal $mod J set-focused-tags $tags
+	riverctl map normal $mod+Shift "$i" set-view-tags $tags
+done
+
+
+riverctl default-layout rivertile
+
+
