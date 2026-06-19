@@ -17,6 +17,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	end
 end
 vim.opt.rtp:prepend(lazypath)
+vim.api.nvim_command("set relativenumber")
 
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 vim.keymap.set("n", "gr", vim.lsp.buf.references)
@@ -42,12 +43,19 @@ require("lazy").setup({
 			signature={ enabled = true, },
 			keymap={
 				preset="default",
+				["<CR>"] = { "accept", "fallback" },
 			},
 
 			appearance={
 				nerd_font_variant="mono"
 			},
 			completion={
+				list = {
+					selection= {
+						preselect=true,
+						auto_insert=false,
+					},
+				},
 				documentation={
 					auto_show=true,
 				},
@@ -67,7 +75,7 @@ require("lazy").setup({
 		branch="master",
 		build=":TSUpdate",
 		opts= {
-			ensure_installed={"c", "cpp", "lua", "go" },
+			ensure_installed={"c", "cpp", "lua", "go", "rust", "python" },
 			highlight = { enable = true },
 		},
 	},
@@ -78,13 +86,32 @@ require("lazy").setup({
 
 })
 
+-- lsp setup
+vim.lsp.enable("clangd")
+vim.lsp.enable('rust_analyzer')
+
+vim.lsp.config("rust_analyzer", {
+	cmd = { "rust-analyzer", },
+	settings = {
+		["rust-analyzer"] = {
+			cargo = { allFeatures = true, },
+			imports = {
+				granularity = {
+					group = "module",
+				},
+				prefix="self",
+			},
+			checkOnSave = true,
+		},
+	},
+})
+
 local capabilities = require("blink.cmp").get_lsp_capabilities()
 vim.lsp.config("clangd", {
-	cmd= {"clangd", "--query-driver=/nix/store/*/bin*"},
+	cmd= {"clangd", "--query-driver=/nix/store/*mingw*/bin/x86_64-w64-mingw32-g++,/nix/store/*gcc*/bin/g++"},
 	capabilities = capabilities,
 })
 
-vim.lsp.enable("clangd")
 
 -- colorscheme
 vim.cmd("colorscheme kanagawa")
