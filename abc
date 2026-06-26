@@ -1,0 +1,1 @@
+efibootmgr --create --disk /dev/sda --part 1 --label "gentoo" --loader="\EFI\Gentoo\vmlinuz.efi" --unicode "initrd=\EFI\Gentoo\initramfs.img rd.luks.uuid=a7571b10-b8eb-4e55-ad5d-cd71b4445b71 root=/dev/mapper/luks-a7571b10-b8eb-4e55-ad5d-cd71b4445b71 rootflags=subvol=@ rootfstype=btrfs nvidia-drm.modeset=1 nvidia-drm.fbdev=1"
