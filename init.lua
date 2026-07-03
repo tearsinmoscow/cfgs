@@ -1,3 +1,5 @@
+### this is a deprecated config. Probably won't be updated anymore, currently im soo deep into emacs
+
 vim.g.clipboard="wl-copy"
 
 vim.g.mapleader = " "
