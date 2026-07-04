@@ -8,7 +8,9 @@
 (ido-everywhere 1)
 (electric-pair-mode)
 (custom-set-faces
- '(font-lock-keyword-face ((t (:foreground "#d96bff")))))
+ '(font-lock-keyword-face ((t (:foreground "#d96bff"))))
+ '(line-number-current-line ((t (:underline t))))
+ )
 (add-to-list 'default-frame-alist '(background-color . "#181818"))
 (add-to-list 'default-frame-alist '(foreground-color . "#d8d8d8"))
 (menu-bar-mode 0)
