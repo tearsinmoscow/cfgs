@@ -14,4 +14,5 @@
 (add-to-list 'default-frame-alist '(background-color . "#181818"))
 (add-to-list 'default-frame-alist '(foreground-color . "#d8d8d8"))
 (menu-bar-mode 0)
+(tool-bar-mode 0)
 (global-display-line-numbers-mode)
